@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCreditCard, faMoneyBillWave, faShoppingCart, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import './TransactionItem.css';
@@ -21,6 +22,8 @@ interface TransactionItemProps {
 }
 
 const TransactionItem: React.FC<TransactionItemProps> = ({ transaction }) => {
+  const navigate = useNavigate();
+
   // Проста логіка вибору іконки
   const getSimpleIcon = (merchant) => {
     const merchantLower = merchant.toLowerCase();
@@ -46,6 +49,13 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ transaction }) => {
   const transactionIcon = getSimpleIcon(transaction.merchant);
   const iconColor = getSimpleColor(transaction.merchant);
 
+  const getDisplayDescription = () => {
+    if (transaction.status === 'pending') {
+      return `Pending - ${transaction.description}`;
+    }
+    return transaction.description;
+  };
+
   const formatDate = (timestamp: string) => {
     const date = new Date(timestamp);
     const day = date.getDate().toString().padStart(2, '0');
@@ -56,7 +66,7 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ transaction }) => {
 
 
   return (
-    <div className="transaction-item">
+    <div className="transaction-item" onClick={() => navigate(`/transaction/${transaction.id}`)}>
       {/* Великий квадрат з символом транзакції */}
       <div className="transaction-icon-large" style={{ backgroundColor: iconColor }}>
         <FontAwesomeIcon icon={transactionIcon} />
@@ -67,13 +77,8 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ transaction }) => {
         {/* Тип транзакції (Apple/IKEA/Payment) */}
         <div className="transaction-type">{transaction.merchant}</div>
 
-        {/* PENDING (якщо є) */}
-        {transaction.status === 'pending' && (
-          <span className="pending-indicator">PENDING</span>
-        )}
-
-        {/* Опис */}
-        <span className="transaction-description">{transaction.description}</span>
+        {/* Опис (з "Pending - " якщо потрібно) */}
+        <span className="transaction-description">{getDisplayDescription()}</span>
 
         {/* Дата */}
         <span className="transaction-date">{formatDate(transaction.timestamp)}</span>
@@ -82,7 +87,7 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ transaction }) => {
       {/* Сума транзакції з стрілочкою */}
       <div className="transaction-amount">
         <span className={`amount ${transaction.type === 'Payment' ? 'positive' : 'negative'}`}>
-          {transaction.type === 'Payment' ? '+' : '-'}
+          {transaction.type === 'Payment' ? '' : ''}
           ${transaction.amount.toFixed(2)}
         </span>
         <div className="transaction-arrow">

@@ -40,7 +40,7 @@
       "amount": 89.99,
       "currency": "USD",
       "merchant": "IKEA",
-      "description": "Pending - Home decor purchase",
+      "description": "Home decor purchase",
       "timestamp": "2025-01-10T14:30:00Z",
       "status": "pending",
       "authorizedUser": "Anna Johnson",

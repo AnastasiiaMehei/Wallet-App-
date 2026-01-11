@@ -1,11 +1,11 @@
 /* Base styles for amount colors */
-.amount.positive {
+/* .amount.positive {
   color: #28a745;
-}
+} */
 
-.amount.negative {
+/* .amount.negative {
   color: #dc3545;
-}
+} */
 
 /* Desktop version - hidden */
 @media (min-width: 481px) {
@@ -56,25 +56,12 @@
 
   /* Тип транзакції (Apple/IKEA/Payment) */
   .transaction-type {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
     color: #333;
-    margin-bottom: 2px;
+    /* margin-bottom: 2px; */
   }
 
-  /* PENDING */
-  .pending-indicator {
-    background-color: #ffc107;
-    color: #856404;
-    padding: 2px 6px;
-    border-radius: 10px;
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    align-self: flex-start;
-    margin-bottom: 2px;
-  }
 
 .transaction-description {
     margin: 0;
@@ -103,13 +90,13 @@
     font-weight: 700;
   }
 
-  .amount.positive {
+  /* .amount.positive {
     color: #28a745;
-  }
+  } */
 
-  .amount.negative {
+  /* .amount.negative {
     color: #dc3545;
-  }
+  } */
 
   .transaction-arrow {
     color: #ccc;

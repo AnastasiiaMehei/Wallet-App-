@@ -1,17 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faArrowLeft,
-  faExchangeAlt,
-  faCheckCircle,
-  faClock,
-  faTimesCircle,
-  faCopy,
-  faShare
-} from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faChevronLeft, faClock } from '@fortawesome/free-solid-svg-icons';
 import { loadWalletData } from '../utils/dataLoader';
-import { faCreditCard, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import './TransactionDetail.css';
 
 // Локальні типи для цього компонента
@@ -59,64 +50,20 @@ const TransactionDetail: React.FC = () => {
     }
   }, [id]);
 
-  const getTransactionTypeIcon = () => {
-    if (!transaction) return faExchangeAlt;
-    const merchantLower = transaction.merchant.toLowerCase();
-    if (merchantLower.includes('ikea') || merchantLower.includes('home')) {
-      return faShoppingCart;
-    }
-    return faCreditCard;
-  };
 
-  const getTransactionTypeColor = () => {
-    if (!transaction) return '#6c757d';
-    // Проста генерація кольору
-    const colors = ['#2C3E50', '#8E44AD', '#2C5530', '#D35400'];
-    let hash = 0;
-    for (let i = 0; i < transaction.merchant.length; i++) {
-      hash = transaction.merchant.charCodeAt(i) + ((hash << 5) - hash);
-    }
-    return colors[Math.abs(hash) % colors.length];
-  };
 
-  const formatDate = (timestamp: string) => {
+
+  const formatDateTime = (timestamp: string) => {
     const date = new Date(timestamp);
-    const now = new Date();
-    const diffTime = Math.abs(now.getTime() - date.getTime());
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-    // Якщо менше 7 днів - показуємо назву дня
-    if (diffDays <= 7) {
-      const dayNames = ['Неділя', 'Понеділок', 'Вівторок', 'Середа', 'Четвер', 'П\'ятниця', 'Субота'];
-      return dayNames[date.getDay()];
-    }
-
-    // Інакше показуємо повну дату
-    return date.toLocaleDateString('uk-UA', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric'
-    });
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    return `${day}.${month}.${year}, ${hours}:${minutes}`;
   };
 
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text).then(() => {
-      // Можна додати toast повідомлення про успішне копіювання
-      console.log('Скопійовано в буфер обміну');
-    });
-  };
 
-  const shareTransaction = () => {
-    if (navigator.share && transaction) {
-      navigator.share({
-        title: 'Деталі транзакції',
-        text: `Транзакція ${transaction.id}: ${transaction.description}`,
-        url: window.location.href,
-      });
-    } else {
-      copyToClipboard(window.location.href);
-    }
-  };
 
   if (loading) {
     return (
@@ -145,127 +92,39 @@ const TransactionDetail: React.FC = () => {
 
   return (
     <div className="transaction-detail-page">
-      <header className="page-header">
-        <button className="back-btn" onClick={() => navigate('/transactions')}>
-          <FontAwesomeIcon icon={faArrowLeft} />
-          <span>До списку</span>
-        </button>
-        <h1>Деталі транзакції</h1>
-        <button className="share-btn" onClick={shareTransaction}>
-          <FontAwesomeIcon icon={faShare} />
+      {/* Верхній лівий кут - блакитна стрілочка для повернення */}
+      <header className="detail-header">
+        <button className="back-arrow" onClick={() => navigate('/')}>
+                  <FontAwesomeIcon icon={faChevronLeft} />
+                  
         </button>
       </header>
 
-      <div className="transaction-detail-card">
-        <div className="transaction-header">
-          <div className="transaction-icon-large" style={{ backgroundColor: getTransactionTypeColor() }}>
-            <FontAwesomeIcon icon={getTransactionTypeIcon()} size="2x" />
-          </div>
-          <div className="transaction-main-info">
-            <h2>{transaction.merchant}</h2>
-            <p className="transaction-description">{transaction.description}</p>
-            <div className="transaction-id">
-              <span>ID: {transaction.id}</span>
-              <button
-                className="copy-btn"
-                onClick={() => copyToClipboard(transaction.id)}
-                title="Копіювати ID"
-              >
-                <FontAwesomeIcon icon={faCopy} />
-              </button>
-            </div>
-          </div>
+      {/* Центральний div з сумою, типом і датою */}
+      <div className="transaction-main-info">
+        <div className="transaction-amount-large">
+          ${transaction.amount.toFixed(2)}
+        </div>
+        <div className="transaction-type-info">
+          {transaction.merchant}
+        </div>
+        <div className="transaction-date-time">
+          {formatDateTime(transaction.timestamp)}
+        </div>
+      </div>
+
+      {/* Нижній div зі статусом, карткою і Total */}
+      <div className="transaction-details-section">
+        <div className="transaction-status">
+          Status: {transaction.status === 'pending' ? 'Pending' : 'Approved'}
+        </div>
+        <div className="transaction-card-info">
+          RBC Bank Debit Card
         </div>
 
-        <div className="transaction-amount-section">
-          <div className="amount-display">
-            <div className="amount-value">
-              <span className={`amount-sign ${transaction.type === 'Payment' ? 'positive' : 'negative'}`}>
-                {transaction.type === 'Payment' ? '+' : '-'}
-              </span>
-              <span className="amount-number">${transaction.amount.toFixed(2)}</span>
-            </div>
-            <div className="currency-label">{transaction.currency}</div>
-          </div>
-        </div>
-
-        <div className="transaction-details-grid">
-          <div className="detail-item">
-            <label>Тип операції</label>
-            <span className="detail-value">{transaction.type}</span>
-          </div>
-
-          <div className="detail-item">
-            <label>Статус</label>
-            <span className={`status-badge status-${transaction.status}`}>
-              <FontAwesomeIcon icon={
-                transaction.status === 'completed' ? faCheckCircle :
-                transaction.status === 'pending' ? faClock :
-                faTimesCircle
-              } />
-              {transaction.status}
-            </span>
-          </div>
-
-          <div className="detail-item">
-            <label>Дата та час</label>
-            <span className="detail-value">{formatDate(transaction.timestamp)}</span>
-          </div>
-
-          <div className="detail-item">
-            <label>Валюта</label>
-            <span className="detail-value">
-              <FontAwesomeIcon icon={
-                transaction.currency === 'USD' ? faExchangeAlt :
-                transaction.currency === 'EUR' ? faExchangeAlt :
-                faExchangeAlt
-              } />
-              {transaction.currency}
-            </span>
-          </div>
-
-          <div className="detail-item">
-            <label>ID транзакції</label>
-            <span className="detail-value id-value">
-              {transaction.id}
-              <button
-                className="copy-btn-small"
-                onClick={() => copyToClipboard(transaction.id)}
-                title="Копіювати ID"
-              >
-                <FontAwesomeIcon icon={faCopy} />
-              </button>
-            </span>
-          </div>
-
-          <div className="detail-item">
-            <label>Продавець</label>
-            <span className="detail-value">{transaction.merchant}</span>
-          </div>
-
-          {transaction.authorizedUser && (
-            <div className="detail-item">
-              <label>Авторизований користувач</label>
-              <span className="detail-value authorized-user">
-                <FontAwesomeIcon icon={faCheckCircle} />
-                {transaction.authorizedUser}
-              </span>
-            </div>
-          )}
-
-          <div className="detail-item full-width">
-            <label>Опис</label>
-            <span className="detail-value description">{transaction.description}</span>
-          </div>
-        </div>
-
-        <div className="transaction-actions">
-          <button className="action-btn secondary" onClick={() => navigate('/transactions')}>
-            Переглянути всі транзакції
-          </button>
-          <button className="action-btn primary" onClick={() => navigate('/')}>
-            До головного екрану
-          </button>
+        <div className="transaction-total">
+          <span className="total-label">Total</span>
+          <span className="total-amount">${transaction.amount.toFixed(2)}</span>
         </div>
       </div>
     </div>
