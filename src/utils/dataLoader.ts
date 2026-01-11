@@ -76,7 +76,7 @@ const walletData: WalletData = {
       "currency": "USD",
       "merchant": "IKEA",
       "description": "Pending - Home decor purchase",
-      "timestamp": "2025-01-10T14:30:00Z",
+      "timestamp": "2024-01-10T14:30:00Z",
       "status": "pending",
       "authorizedUser": "Anna Johnson"
     },
@@ -87,7 +87,7 @@ const walletData: WalletData = {
       "currency": "USD",
       "merchant": "Starbucks",
       "description": "Coffee and pastry",
-      "timestamp": "2025-01-10T09:15:00Z",
+      "timestamp": "2024-01-10T09:15:00Z",
       "status": "completed"
     },
     {
@@ -97,7 +97,7 @@ const walletData: WalletData = {
       "currency": "USD",
       "merchant": "Target",
       "description": "Groceries and household items",
-      "timestamp": "2025-01-09T16:45:00Z",
+      "timestamp": "2024-01-09T16:45:00Z",
       "status": "completed",
       "authorizedUser": "Mike Chen"
     },
@@ -108,7 +108,7 @@ const walletData: WalletData = {
       "currency": "USD",
       "merchant": "Card Payment",
       "description": "Monthly card payment",
-      "timestamp": "2025-01-09T12:00:00Z",
+      "timestamp": "2024-01-09T12:00:00Z",
       "status": "completed"
     },
     {
@@ -118,7 +118,7 @@ const walletData: WalletData = {
       "currency": "USD",
       "merchant": "Amazon",
       "description": "Electronics and books",
-      "timestamp": "2025-01-08T20:30:00Z",
+      "timestamp": "2024-01-08T20:30:00Z",
       "status": "completed",
       "authorizedUser": "Sarah Williams"
     },
@@ -129,7 +129,7 @@ const walletData: WalletData = {
       "currency": "USD",
       "merchant": "Walmart",
       "description": "Clothing and accessories",
-      "timestamp": "2025-01-08T15:20:00Z",
+      "timestamp": "2024-01-08T15:20:00Z",
       "status": "completed"
     },
     {
@@ -139,7 +139,7 @@ const walletData: WalletData = {
       "currency": "USD",
       "merchant": "Card Payment",
       "description": "Additional payment",
-      "timestamp": "2025-01-07T10:00:00Z",
+      "timestamp": "2024-01-07T10:00:00Z",
       "status": "completed"
     },
     {
@@ -149,7 +149,7 @@ const walletData: WalletData = {
       "currency": "USD",
       "merchant": "Best Buy",
       "description": "Computer accessories",
-      "timestamp": "2025-01-06T18:45:00Z",
+      "timestamp": "2024-01-06T18:45:00Z",
       "status": "completed"
     },
     {
@@ -159,7 +159,7 @@ const walletData: WalletData = {
       "currency": "USD",
       "merchant": "Macy's",
       "description": "Fashion items",
-      "timestamp": "2025-01-05T14:20:00Z",
+      "timestamp": "2024-01-05T14:20:00Z",
       "status": "completed"
     },
     {
@@ -169,7 +169,7 @@ const walletData: WalletData = {
       "currency": "USD",
       "merchant": "Home Depot",
       "description": "Tools and hardware",
-      "timestamp": "2025-01-04T11:30:00Z",
+      "timestamp": "2024-01-04T11:30:00Z",
       "status": "completed"
     },
     {
@@ -179,7 +179,7 @@ const walletData: WalletData = {
       "currency": "USD",
       "merchant": "Subway",
       "description": "Lunch sandwich",
-      "timestamp": "2025-01-03T12:45:00Z",
+      "timestamp": "2024-01-03T12:45:00Z",
       "status": "completed"
     },
     {
@@ -189,7 +189,7 @@ const walletData: WalletData = {
       "currency": "USD",
       "merchant": "Card Payment",
       "description": "Weekly payment",
-      "timestamp": "2025-01-02T09:00:00Z",
+      "timestamp": "2024-01-02T09:00:00Z",
       "status": "completed"
     }
   ],

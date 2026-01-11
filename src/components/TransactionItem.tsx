@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCreditCard, faMoneyBillWave, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { faCreditCard, faMoneyBillWave, faShoppingCart, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import './TransactionItem.css';
 
 // Локальні типи для цього компонента
@@ -48,72 +48,46 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ transaction }) => {
 
   const formatDate = (timestamp: string) => {
     const date = new Date(timestamp);
-    const now = new Date();
-    const diffTime = Math.abs(now.getTime() - date.getTime());
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-    // Якщо менше 7 днів - показуємо назву дня
-    if (diffDays <= 7) {
-      const dayNames = ['Неділя', 'Понеділок', 'Вівторок', 'Середа', 'Четвер', 'П\'ятниця', 'Субота'];
-      return dayNames[date.getDay()];
-    }
-
-    // Інакше показуємо повну дату
-    return date.toLocaleDateString('uk-UA', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric'
-    });
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}.${month}.${year}`;
   };
 
-  const getDisplayDescription = () => {
-    if (transaction.status === 'pending') {
-      return `Pending - ${transaction.description}`;
-    }
-    return transaction.description;
-  };
 
   return (
     <div className="transaction-item">
-      <div className="transaction-icon" style={{ backgroundColor: iconColor }}>
+      {/* Великий квадрат з символом транзакції */}
+      <div className="transaction-icon-large" style={{ backgroundColor: iconColor }}>
         <FontAwesomeIcon icon={transactionIcon} />
       </div>
 
-      <div className="transaction-details">
-        <div className="transaction-header">
-          <div className="merchant-info">
-            <span className="merchant-name">{transaction.merchant}</span>
-            <span className="transaction-description">{getDisplayDescription()}</span>
-          </div>
-          <div className="transaction-badges">
-            {transaction.status === 'pending' && (
-              <span className="pending-badge">Pending</span>
-            )}
-            {transaction.authorizedUser && (
-              <span className="authorized-badge">
-                {transaction.authorizedUser}
-              </span>
-            )}
-          </div>
-        </div>
+      {/* Контент з інформацією про транзакцію */}
+      <div className="transaction-content">
+        {/* Тип транзакції (Apple/IKEA/Payment) */}
+        <div className="transaction-type">{transaction.merchant}</div>
 
-        <div className="transaction-meta">
-          {transaction.authorizedUser && (
-            <span className="authorized-user">{transaction.authorizedUser} • </span>
-          )}
-          <span className="transaction-date">{formatDate(transaction.timestamp)}</span>
-          <span className="transaction-id">ID: {transaction.id}</span>
-        </div>
+        {/* PENDING (якщо є) */}
+        {transaction.status === 'pending' && (
+          <span className="pending-indicator">PENDING</span>
+        )}
+
+        {/* Опис */}
+        <span className="transaction-description">{transaction.description}</span>
+
+        {/* Дата */}
+        <span className="transaction-date">{formatDate(transaction.timestamp)}</span>
       </div>
 
+      {/* Сума транзакції з стрілочкою */}
       <div className="transaction-amount">
-        <div className="amount-value">
-          <span className={`amount ${transaction.type === 'Payment' ? 'positive' : 'negative'}`}>
-            {transaction.type === 'Payment' ? '+' : '-'}
-            ${transaction.amount.toFixed(2)}
-          </span>
+        <span className={`amount ${transaction.type === 'Payment' ? 'positive' : 'negative'}`}>
+          {transaction.type === 'Payment' ? '+' : '-'}
+          ${transaction.amount.toFixed(2)}
+        </span>
+        <div className="transaction-arrow">
+          <FontAwesomeIcon icon={faChevronRight} />
         </div>
-        <span className="currency-code">{transaction.currency}</span>
       </div>
     </div>
   );
