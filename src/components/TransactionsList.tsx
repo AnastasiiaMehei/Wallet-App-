@@ -173,13 +173,13 @@ const TransactionsList: React.FC = () => {
       </div>
 
       {/* Card Balance Block */}
-      {walletData.card && <CardBalanceBlock card={walletData.card} />}
+      {walletData && walletData.card && <CardBalanceBlock card={walletData.card} />}
 
       {/* No Payment Block */}
       <NoPaymentBlock />
 
       {/* Daily Points Block */}
-      {walletData.dailyPoints && <DailyPointsBlock points={walletData.dailyPoints} />}
+      {walletData && walletData.dailyPoints && <DailyPointsBlock points={walletData.dailyPoints} />}
 
       {/* Recent Transactions Header */}
       <div className="section-header">

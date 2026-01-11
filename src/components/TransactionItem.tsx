@@ -25,7 +25,7 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ transaction }) => {
   const navigate = useNavigate();
 
   // Проста логіка вибору іконки
-  const getSimpleIcon = (merchant) => {
+  const getSimpleIcon = (merchant: string) => {
     const merchantLower = merchant.toLowerCase();
     if (merchantLower.includes('coffee') || merchantLower.includes('starbucks')) {
       return faMoneyBillWave;
@@ -36,7 +36,7 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ transaction }) => {
     return faCreditCard;
   };
 
-  const getSimpleColor = (merchant) => {
+  const getSimpleColor = (merchant: string) => {
     // Проста генерація кольору на основі імені
     const colors = ['#2C3E50', '#8E44AD', '#2C5530', '#D35400', '#154360'];
     let hash = 0;

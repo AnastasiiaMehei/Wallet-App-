@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faChevronLeft, faClock } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faClock, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { loadWalletData } from '../utils/dataLoader';
 import './TransactionDetail.css';
 
