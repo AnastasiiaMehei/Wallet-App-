@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faWallet, faCoins, faHistory, faCog } from '@fortawesome/free-solid-svg-icons'
+import { faCheck } from '@fortawesome/free-solid-svg-icons'
 import { loadWalletData } from '../utils/dataLoader'
 
 
@@ -52,15 +51,13 @@ interface WalletData {
   transactions: Transaction[];
   currencies: Currency[];
 }
-import BalanceCard from './BalanceCard'
 import TransactionItem from './TransactionItem'
-import '../App.css'
+import './HomePage.css'
 
 const HomePage: React.FC = () => {
   const [walletData, setWalletData] = useState<WalletData | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -78,15 +75,12 @@ const HomePage: React.FC = () => {
     fetchData()
   }, [])
 
-  const handleViewAllTransactions = () => {
-    navigate('/transactions')
-  }
 
   if (loading) {
     return (
-      <div className="app">
+      <div className="homepage">
         <div className="loading">
-          <FontAwesomeIcon icon={faCoins} spin size="2x" />
+          <FontAwesomeIcon icon={faCheck} spin size="2x" />
           <p>Loading...</p>
         </div>
       </div>
@@ -95,79 +89,61 @@ const HomePage: React.FC = () => {
 
   if (error) {
     return (
-      <div className="app">
+      <div className="homepage">
         <div className="error">
-          <FontAwesomeIcon icon={faWallet} size="2x" />
+          <FontAwesomeIcon icon={faCheck} size="2x" />
           <p>{error}</p>
         </div>
       </div>
     )
   }
 
+  const cardBalance = walletData?.card?.balance || 0;
+  const cardLimit = 1500;
+  const availableAmount = cardLimit - cardBalance;
+  const dailyPoints = walletData?.dailyPoints || 0;
+
   return (
-    <div className="app">
-      <header className="app-header">
-        <div className="header-content">
-          <FontAwesomeIcon icon={faWallet} className="wallet-icon" />
-          <h1>Wallet App</h1>
-          <p className="user-info">
-            Welcome, {walletData?.user.name}!
-          </p>
+    <div className="homepage">
+      <div className="top-section">
+        {/* Лівий верхній кут - Card Balance */}
+        <div className="card-balance-section">
+          <h2 className="section-title">Card Balance</h2>
+          <div className="balance-amount">${cardBalance.toFixed(2)}</div>
+          <div className="available-amount">${availableAmount.toFixed(2)} Available</div>
         </div>
-      </header>
 
-      <main className="app-main">
-        <section className="balances-section">
-          <h2>
-            <FontAwesomeIcon icon={faCoins} />
-            Balances
-          </h2>
-          <div className="balances-grid">
-            {walletData?.balances.map((balance) => (
-              <BalanceCard key={balance.currency} balance={balance} />
-            ))}
-          </div>
-        </section>
+        {/* Правий верхній кут - No Payment Due */}
+        <div className="payment-status-section">
+          <h2 className="section-title">No Payment Due</h2>
+          <div className="payment-message">September balance.</div>
+        </div>
+      </div>
 
-        <section className="transactions-section">
-          <div className="transactions-header">
-            <h2>
-              <FontAwesomeIcon icon={faHistory} />
-              Recent transactions
-            </h2>
-            <button className="view-all-btn" onClick={handleViewAllTransactions}>
-              View all
-            </button>
+      {/* Daily Points секція */}
+      <div className="daily-points-section">
+        <div className="daily-points-content">
+          <div className="daily-points-left">
+            <h3 className="daily-points-title">Daily points</h3>
+            <div className="points-amount">{dailyPoints}</div>
           </div>
-          <div className="transactions-list">
-            {walletData?.transactions.slice(0, 3).map((transaction) => (
-              <TransactionItem key={transaction.id} transaction={transaction} />
-            ))}
+          <div className="daily-points-right">
+            <div className="points-checkmark">
+              <FontAwesomeIcon icon={faCheck} />
+            </div>
           </div>
-        </section>
+        </div>
+      </div>
 
-        <section className="quick-actions">
-          <h2>Quick actions</h2>
-          <div className="actions-grid">
-            <button className="action-btn">
-              <FontAwesomeIcon icon={faWallet} />
-              <span>Top up</span>
-            </button>
-            <button className="action-btn">
-              <FontAwesomeIcon icon={faCoins} />
-              <span>Transfer</span>
-            </button>
-            <button className="action-btn" onClick={handleViewAllTransactions}>
-              <FontAwesomeIcon icon={faHistory} />
-              <span>History</span>
-            </button>
-            <button className="action-btn">
-              <FontAwesomeIcon icon={faCog} />
-              <span>Settings</span>
-            </button>
-          </div>
-        </section>
-      </main>
+      {/* Latest Transactions секція */}
+      <div className="latest-transactions-section">
+        <h2 className="transactions-title">Latest Transactions</h2>
+        <div className="transactions-list">
+          {walletData?.transactions.slice(0, 10).map((transaction) => (
+            <TransactionItem key={transaction.id} transaction={transaction} />
+          ))}
+        </div>
+      </div>
     </div>
   )
 }

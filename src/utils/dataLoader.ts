@@ -47,14 +47,12 @@ interface WalletData {
   currencies: Currency[];
 }
 
-/**
- * Тестові дані для wallet додатку
- */
+
 const walletData: WalletData = {
   "user": {
     "id": "user-001",
-    "name": "Dmytro",
-    "email": "dmytro@example.com",
+    "name": "Anastasiia",
+    "email": "Anastas@mail.com",
     "createdAt": "2024-01-01T00:00:00Z"
   },
   "card": {
@@ -68,21 +66,6 @@ const walletData: WalletData = {
       "currency": "USD",
       "amount": 1250.50,
       "symbol": "$"
-    },
-    {
-      "currency": "EUR",
-      "amount": 850.25,
-      "symbol": "€"
-    },
-    {
-      "currency": "BTC",
-      "amount": 0.025,
-      "symbol": "₿"
-    },
-    {
-      "currency": "ETH",
-      "amount": 0.5,
-      "symbol": "Ξ"
     }
   ],
   "transactions": [
@@ -216,34 +199,14 @@ const walletData: WalletData = {
       "name": "US Dollar",
       "symbol": "$",
       "rate": 1.0
-    },
-    {
-      "code": "EUR",
-      "name": "Euro",
-      "symbol": "€",
-      "rate": 0.85
-    },
-    {
-      "code": "BTC",
-      "name": "Bitcoin",
-      "symbol": "₿",
-      "rate": 45000.0
-    },
-    {
-      "code": "ETH",
-      "name": "Ethereum",
-      "symbol": "Ξ",
-      "rate": 2500.0
     }
   ]
 };
 
-/**
- * Завантажує тестові дані
- */
+
 export const loadWalletData = async (): Promise<WalletData> => {
   try {
-    // Імітуємо невелику затримку для реалістичного завантаження
+    
     await new Promise(resolve => setTimeout(resolve, 500));
     return walletData;
   } catch (error) {
@@ -252,14 +215,10 @@ export const loadWalletData = async (): Promise<WalletData> => {
   }
 };
 
-/**
- * Зберігає дані у JSON файл (у реальному додатку це буде API запит)
- * Наразі просто симулює збереження та повертає оновлені дані
- */
+
 export const saveWalletData = async (data: WalletData): Promise<WalletData> => {
   try {
-    // У реальному додатку тут буде API запит для збереження даних
-    // Наразі просто симулюємо збереження
+   
     console.log('Збереження даних:', data);
     return data;
   } catch (error) {

@@ -1,0 +1,200 @@
+.homepage {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.top-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.card-balance-section,
+.payment-status-section {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 12px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.balance-amount {
+  font-size: 32px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.available-amount {
+  font-size: 14px;
+  color: #666;
+  opacity: 0.8;
+}
+
+.payment-message {
+  font-size: 14px;
+  color: #666;
+  opacity: 0.8;
+}
+
+.daily-points-section {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 30px;
+  color: white;
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+}
+
+.daily-points-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.daily-points-left {
+  flex: 1;
+}
+
+.daily-points-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+}
+
+.points-amount {
+  font-size: 28px;
+  font-weight: 700;
+  opacity: 0.9;
+}
+
+.daily-points-right {
+  margin-left: 20px;
+}
+
+.points-checkmark {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.latest-transactions-section {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.transactions-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 20px 0;
+}
+
+.transactions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Loading and error states */
+.loading, .error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  gap: 20px;
+  color: #666;
+}
+
+.loading svg {
+  color: #667eea;
+}
+
+.error svg {
+  color: #dc3545;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .homepage {
+    padding: 15px;
+  }
+
+  .top-section {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+
+  .card-balance-section,
+  .payment-status-section,
+  .daily-points-section,
+  .latest-transactions-section {
+    padding: 20px;
+  }
+
+  .daily-points-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .daily-points-right {
+    margin-left: 0;
+    align-self: flex-end;
+  }
+
+  .balance-amount {
+    font-size: 28px;
+  }
+
+  .points-amount {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-title {
+    font-size: 14px;
+  }
+
+  .balance-amount {
+    font-size: 24px;
+  }
+
+  .available-amount,
+  .payment-message {
+    font-size: 12px;
+  }
+
+  .daily-points-title {
+    font-size: 16px;
+  }
+
+  .points-amount {
+    font-size: 20px;
+  }
+
+  .transactions-title {
+    font-size: 18px;
+  }
+}
