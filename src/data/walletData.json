@@ -1,0 +1,190 @@
+{
+  "user": {
+    "id": "user-001",
+    "name": "Anastasiia",
+    "email": "Anastasiia@example.com",
+    "createdAt": "2024-01-01T00:00:00Z"
+  },
+  "card": {
+    "limit": 1500.00,
+    "balance": 847.23,
+    "available": 652.77
+  },
+  "dailyPoints": 247,
+  "balances": [
+    {
+      "currency": "USD",
+      "amount": 1250.50,
+      "symbol": "$"
+    },
+    {
+      "currency": "EUR",
+      "amount": 850.25,
+      "symbol": "€"
+    },
+    {
+      "currency": "BTC",
+      "amount": 0.025,
+      "symbol": "₿"
+    },
+    {
+      "currency": "ETH",
+      "amount": 0.5,
+      "symbol": "Ξ"
+    }
+  ],
+  "transactions": [
+    {
+      "id": "tx-001",
+      "type": "Credit",
+      "amount": 89.99,
+      "currency": "USD",
+      "merchant": "IKEA",
+      "description": "Pending - Home decor purchase",
+      "timestamp": "2025-01-10T14:30:00Z",
+      "status": "pending",
+      "authorizedUser": "Anna Johnson",
+      "icon": "faHome"
+    },
+    {
+      "id": "tx-002",
+      "type": "Credit",
+      "amount": 45.67,
+      "currency": "USD",
+      "merchant": "Starbucks",
+      "description": "Coffee and pastry",
+      "timestamp": "2025-01-10T09:15:00Z",
+      "status": "completed",
+      "icon": "faCoffee"
+    },
+    {
+      "id": "tx-003",
+      "type": "Credit",
+      "amount": 127.50,
+      "currency": "USD",
+      "merchant": "Target",
+      "description": "Groceries and household items",
+      "timestamp": "2025-01-09T16:45:00Z",
+      "status": "completed",
+      "authorizedUser": "Mike Chen",
+      "icon": "faShoppingCart"
+    },
+    {
+      "id": "tx-004",
+      "type": "Payment",
+      "amount": 500.00,
+      "currency": "USD",
+      "merchant": "Card Payment",
+      "description": "Monthly card payment",
+      "timestamp": "2025-01-09T12:00:00Z",
+      "status": "completed"
+    },
+    {
+      "id": "tx-005",
+      "type": "Credit",
+      "amount": 234.89,
+      "currency": "USD",
+      "merchant": "Amazon",
+      "description": "Electronics and books",
+      "timestamp": "2025-01-08T20:30:00Z",
+      "status": "completed",
+      "authorizedUser": "Sarah Williams"
+    },
+    {
+      "id": "tx-006",
+      "type": "Credit",
+      "amount": 67.43,
+      "currency": "USD",
+      "merchant": "Walmart",
+      "description": "Clothing and accessories",
+      "timestamp": "2025-01-08T15:20:00Z",
+      "status": "completed"
+    },
+    {
+      "id": "tx-007",
+      "type": "Payment",
+      "amount": 300.00,
+      "currency": "USD",
+      "merchant": "Card Payment",
+      "description": "Additional payment",
+      "timestamp": "2025-01-07T10:00:00Z",
+      "status": "completed"
+    },
+    {
+      "id": "tx-008",
+      "type": "Credit",
+      "amount": 156.78,
+      "currency": "USD",
+      "merchant": "Best Buy",
+      "description": "Computer accessories",
+      "timestamp": "2025-01-06T18:45:00Z",
+      "status": "completed"
+    },
+    {
+      "id": "tx-009",
+      "type": "Credit",
+      "amount": 92.34,
+      "currency": "USD",
+      "merchant": "Macy's",
+      "description": "Fashion items",
+      "timestamp": "2025-01-05T14:20:00Z",
+      "status": "completed"
+    },
+    {
+      "id": "tx-010",
+      "type": "Credit",
+      "amount": 78.90,
+      "currency": "USD",
+      "merchant": "Home Depot",
+      "description": "Tools and hardware",
+      "timestamp": "2025-01-04T11:30:00Z",
+      "status": "completed"
+    },
+    {
+      "id": "tx-011",
+      "type": "Credit",
+      "amount": 45.23,
+      "currency": "USD",
+      "merchant": "Subway",
+      "description": "Lunch sandwich",
+      "timestamp": "2025-01-03T12:45:00Z",
+      "status": "completed"
+    },
+    {
+      "id": "tx-012",
+      "type": "Payment",
+      "amount": 200.00,
+      "currency": "USD",
+      "merchant": "Card Payment",
+      "description": "Weekly payment",
+      "timestamp": "2025-01-02T09:00:00Z",
+      "status": "completed"
+    }
+  ],
+  "currencies": [
+    {
+      "code": "USD",
+      "name": "US Dollar",
+      "symbol": "$",
+      "rate": 1.0
+    },
+    {
+      "code": "EUR",
+      "name": "Euro",
+      "symbol": "€",
+      "rate": 0.85
+    },
+    {
+      "code": "BTC",
+      "name": "Bitcoin",
+      "symbol": "₿",
+      "rate": 45000.0
+    },
+    {
+      "code": "ETH",
+      "name": "Ethereum",
+      "symbol": "Ξ",
+      "rate": 2500.0
+    }
+  ]
+}
