@@ -210,7 +210,7 @@ export const loadWalletData = async (): Promise<WalletData> => {
     await new Promise(resolve => setTimeout(resolve, 500));
     return walletData;
   } catch (error) {
-    console.error('Помилка завантаження даних:', error);
+    console.error('Error loading data:', error);
     throw error;
   }
 };
@@ -219,7 +219,7 @@ export const loadWalletData = async (): Promise<WalletData> => {
 export const saveWalletData = async (data: WalletData): Promise<WalletData> => {
   try {
    
-    console.log('Збереження даних:', data);
+    console.log('Saving data:', data);
     return data;
   } catch (error) {
     console.error('Помилка збереження даних:', error);

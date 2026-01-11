@@ -35,10 +35,10 @@ const TransactionDetail: React.FC = () => {
         if (foundTransaction) {
           setTransaction(foundTransaction);
         } else {
-          setError('Транзакцію не знайдено');
+          setError('Transaction not found');
         }
       } catch (err) {
-        setError('Помилка завантаження даних');
+        setError('Error loading data');
         console.error(err);
       } finally {
         setLoading(false);
@@ -70,7 +70,7 @@ const TransactionDetail: React.FC = () => {
       <div className="transaction-detail-page">
         <div className="loading">
           <FontAwesomeIcon icon={faClock} spin size="2x" />
-          <p>Завантаження деталей транзакції...</p>
+          <p>Loading transaction details...</p>
         </div>
       </div>
     );
@@ -81,9 +81,9 @@ const TransactionDetail: React.FC = () => {
       <div className="transaction-detail-page">
         <div className="error">
           <FontAwesomeIcon icon={faTimesCircle} size="2x" />
-          <p>{error || 'Транзакцію не знайдено'}</p>
+          <p>{error || 'Transaction not found'}</p>
           <button className="back-btn" onClick={() => navigate('/transactions')}>
-            Повернутися до списку
+            Return to list
           </button>
         </div>
       </div>
